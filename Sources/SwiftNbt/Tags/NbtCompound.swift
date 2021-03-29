@@ -18,13 +18,13 @@ public final class NbtCompound: NbtTag {
     private var _tags: [NbtTag] = []
     
     /// Creates an empty, unnamed NbtCompound tag.
-    override init() {
+    override public init() {
         super.init()
     }
     
     /// Creates  an empty NbtCompound tag with the given name.
     /// - Parameter name: Name to assign to this tag. May be `nil`.
-    init(name: String?) {
+    public init(name: String?) {
         super.init()
         self.name = name
     }
@@ -33,7 +33,7 @@ public final class NbtCompound: NbtTag {
     /// - Parameter tags: Collection of tags to include.
     /// - Throws: An `NbtError.argumentError` if some of the tags were not named or
     /// two tags with teh same name were given.
-    convenience init(_ tags: [NbtTag]) throws {
+    convenience public init(_ tags: [NbtTag]) throws {
         try self.init(name: nil, tags)
     }
     
@@ -43,7 +43,7 @@ public final class NbtCompound: NbtTag {
     ///   - tags: Collection of tags to include.
     /// - Throws: An `NbtError.argumentError` if some of the tags were not named or
     ///  two tags with teh same name were given.
-    init(name: String?, _ tags: [NbtTag]) throws {
+    public init(name: String?, _ tags: [NbtTag]) throws {
         super.init()
         self.name = name
         for tag in tags {
@@ -55,7 +55,7 @@ public final class NbtCompound: NbtTag {
     /// - Parameter other: An existing NbtCompound to copy.
     /// - Throws: An `NbtError.argumentError` if some of the tags were not named or
     /// two tags with teh same name were given.
-    init(from other: NbtCompound) throws {
+    public init(from other: NbtCompound) throws {
         super.init()
         _name = other.name
         // Copy keys
