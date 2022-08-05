@@ -12,6 +12,7 @@ import XCTest
 enum TestFile {
     case small
     case big
+    case nonUTF8(Int)
 }
 
 class TestData {
@@ -415,6 +416,8 @@ class TestData {
             fileName.append("test")
         case .big:
             fileName.append("bigtest")
+        case .nonUTF8(let index):
+            fileName.append("actorprefix\(index)")
         }
         
         switch compression {
@@ -451,6 +454,8 @@ class TestData {
             return 34
         case .big:
             return 1783
+        case .nonUTF8:
+            return 767
         }
     }
 }
