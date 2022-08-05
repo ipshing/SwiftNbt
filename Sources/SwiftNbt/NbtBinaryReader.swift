@@ -120,7 +120,8 @@ final class NbtBinaryReader {
         
         var utf8 = UTF8()
         var string = ""
-        var generator = try readBytes(Int(length)).makeIterator()
+        let bytes = try readBytes(Int(length))
+        var generator = bytes.makeIterator()
 
         while true {
             switch utf8.decode(&generator) {
@@ -129,7 +130,11 @@ final class NbtBinaryReader {
             case .emptyInput:
                 return string
             case .error:
-                throw NbtError.stringConversionError
+                if let str = String(data: Data(bytes), encoding: .isoLatin1) {
+                    return str
+                } else {
+                    throw NbtError.stringConversionError
+                }
             }
         }
     }
